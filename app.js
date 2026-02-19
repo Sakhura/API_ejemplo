@@ -16,18 +16,17 @@ function obtenerUsuariosConThen(){
             mostrarUsuarios(usuarios);                  //5. mostramos los usuarios
         })
         .catch(function(error){                         //6. capturamos cualquier error
-            document.getElementById("mensaje-error").textContent = "X" + error.message;
+            document.getElementById("mensaje-error").textContent = "✗ " + error.message;
         });
-
 }
 
 // fx que construya las tarjetas en el DOM
 
 function mostrarUsuarios(usuarios){
     const contenedor = document.getElementById("contenedor");
-    contenedor.innerHTML= "";
+    contenedor.innerHTML = "";
 
-    usuarios.foreach(function(usuario){
+    usuarios.forEach(function(usuario){
         //se creara una tarjeta por usuario
         const card = document.createElement("div");
         card.className = "card";
@@ -41,13 +40,13 @@ function mostrarUsuarios(usuarios){
     });
 }
 
-//version async/await 
+// Version async/await
 
 async function obtenerUsuariosConAsync() {
-    document.getElementById("contenedor").innerHTML= "Cargando ...";
+    document.getElementById("contenedor").innerHTML = "Cargando ...";
     document.getElementById("mensaje-error").textContent = "";
 
-    try{
+    try {
         const respuesta = await fetch("https://jsonplaceholder.typicode.com/users");
 
         if(!respuesta.ok){
@@ -56,10 +55,7 @@ async function obtenerUsuariosConAsync() {
 
         const usuarios = await respuesta.json();
         mostrarUsuarios(usuarios);
-    }catch (error){
-        document.getElementById("mensaje-error").textContent = "X" + error.message;
-
+    } catch (error) {
+        document.getElementById("mensaje-error").textContent = "✗ " + error.message;
     }
-
-    
 }
